@@ -7,7 +7,7 @@ def index():
     return render_template("index.html")
 
 def hello():
-    return "Hello"
+    return "Hello!"
 
 #if __name__ == "__main__":
 #    app.run(debug=True) 
