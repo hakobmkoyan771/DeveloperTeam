@@ -9,7 +9,7 @@ pipeline {
       steps {
         script {
           AFTER_TEST = sh "git rev-parse refs/remotes/origin/main^{commit}" 
-          BEFORE_TEST = sh """docker exec redis-server redis-cli "get" "BEFORE_TEST" """
+          BEFORE_TEST = sh """docker exec redis_server redis-cli "get" "BEFORE_TEST" """
           echo BEFORE_TEST
           echo AFTER_TEST
           if(BEFORE_TEST != AFTER_TEST) 
