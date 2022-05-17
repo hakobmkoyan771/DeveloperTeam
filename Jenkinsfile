@@ -1,4 +1,5 @@
 pipeline {
+    agent any
     triggers {
         GenericTrigger(causeString: 'Generic Cause', 
                        genericVariables: [[key: 'chideminch', value: '$.repository.commits_url']])
