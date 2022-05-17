@@ -5,7 +5,9 @@ pipeline {
     }
     stages {
         stage("print") {
-            echo "${chideminch}"
+            steps {
+                echo "${chideminch}"
+            }
         }
     }
 }
