@@ -1,6 +1,19 @@
 pipeline {
   agent any
   environment {
+     
+  }
+  stages {
+    stage("Compare TAG Before test & TAG after test") {
+      steps {
+         
+      }
+    }
+  }
+}
+/*pipeline {
+  agent any
+  environment {
     BEFORE_TEST = ""
     AFTER_TEST = ""
   }
@@ -26,3 +39,4 @@ pipeline {
       }
    }
 }
+*/
