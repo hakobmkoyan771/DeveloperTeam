@@ -1,4 +1,15 @@
 pipeline {
+    triggers {
+        GenericTrigger(causeString: 'Generic Cause', 
+                       genericVariables: [[key: 'chideminch', value: '$.repository.commits_url']])
+    }
+    stages {
+        stage("print") {
+            echo "${chideminch}"
+        }
+    }
+}
+/*pipeline {
   agent any
   environment {
     BEFORE_TEST = ""
@@ -27,3 +38,4 @@ pipeline {
    }
 }
   
+*/
