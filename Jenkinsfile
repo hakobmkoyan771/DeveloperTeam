@@ -8,7 +8,7 @@ pipeline {
     stage("Compare hash BEFORE_TEST & AFTER_TEST") {
       steps {
         script {
-          AFTER_TEST = sh "git rev-parse --tags 1.0.0" 
+          AFTER_TEST = sh "git rev-parse hakobmkoyan771/PythonWorkdir --tags 1.0.0" 
           BEFORE_TEST = sh """docker exec redis_server redis-cli "get" "BEFORE_TEST" """
           echo BEFORE_TEST
           echo AFTER_TEST
