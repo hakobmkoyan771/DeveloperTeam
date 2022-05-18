@@ -8,16 +8,12 @@ pipeline {
       steps {
         script {
           sh "echo ${TAG_NAME}"
+          sh "echo ${COMMIT_SHA}"
          /* COMMIT_SHA_AFTER_TEST = sh """git ls-remote rev-list -n 1 ${RELEASE_TAG}"""
           if(COMMIT_SHA_AFTER_TEST != RELEASE_TAG) {
              error("Commit hash has been changed!")
           }*/
         }
-      }
-    }
-    stage("Bulid docker image") {
-      steps {
-        sh "echo buildin in process ..." 
       }
     }
   }
