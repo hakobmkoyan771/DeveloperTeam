@@ -10,9 +10,9 @@ pipeline {
     stage("Compare TAG Before test & TAG after test") {
       steps {
         script {
-          TAG_NAME = sh returnStdout: true, script: """docker exec redis_server 'get' 'TAG_NAME' """
-          COMMIT_SHA = sh returnStdout: true, script: """docker exec redis_server 'get' 'COMMIT_HASH' """
-          REPO_LINK = sh returnStdout: true, script: """docker exec redis_server 'get' 'DEV_REPO' """
+          TAG_NAME = sh returnStdout: true, script: """docker exec redis_server redis-cli 'get' 'TAG_NAME' """
+          COMMIT_SHA = sh returnStdout: true, script: """docker exec redis_server redis-cli 'get' 'COMMIT_HASH' """
+          REPO_LINK = sh returnStdout: true, script: """docker exec redis_server redis-cli 'get' 'DEV_REPO' """
           echo TAG_NAME
           echo COMMIT_SHA
           echo REPO_LINK
