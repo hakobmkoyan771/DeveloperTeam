@@ -7,7 +7,6 @@ pipeline {
     stage("Compare TAG Before test & TAG after test") {
       steps {
         script {
-          sh "echo ${test}"
           sh "echo ${TAG_NAME}"
           sh "echo ${COMMIT_SHA}"
           sh "echo ${RELEASE_TAG}"
