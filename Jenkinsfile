@@ -7,15 +7,25 @@ pipeline {
      REPO_LINK = ""
   }
   stages {
-    stage("Compare TAG Before test & TAG after test") {
+    stage("Initialize Variables") {
       steps {
         script {
           TAG_NAME = sh returnStdout: true, script: """docker exec redis_server redis-cli 'get' 'TAG_NAME' """
           COMMIT_SHA = sh returnStdout: true, script: """docker exec redis_server redis-cli 'get' 'COMMIT_HASH' """
-          REPO_LINK = sh returnStdout: true, script: """docker exec redis_server redis-cli 'get' 'DEV_REPO' """
-          echo TAG_NAME
-          echo COMMIT_SHA
-          echo REPO_LINK
+          REPO_LINK = sh returnStdout: true, script: """docker exec redis_server redis-cli 'get' 'DEV_REPO' """      
+        }
+      }
+    }
+    stage("Compare TAG Before test & TAG after test") {
+      steps {
+        script {
+          dir('DevRepo') {
+            git branch: 'main', url: "${REPO_LINK}" 
+            COMMIT_SHA_AFTER_TEST = sh returnStdout: true, script: "git rev-list -n 1 ${TAG_NAME}"
+            if(COMMIT_SHA_AFTER_TEST != COMMIT_SHA) {
+              error("Commit hashes are not equal each other") 
+            }
+          }
          /* COMMIT_SHA_AFTER_TEST = sh """git ls-remote rev-list -n 1 ${RELEASE_TAG}"""
           if(COMMIT_SHA_AFTER_TEST != RELEASE_TAG) {
              error("Commit hash has been changed!")
