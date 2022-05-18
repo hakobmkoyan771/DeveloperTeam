@@ -3,13 +3,19 @@ pipeline {
   environment {
      COMMIT_SHA_AFTER_TEST = ""
      TAG_NAME = ""
+     COMMIT_SHA = ""
+     REPO_LINK = ""
   }
   stages {
     stage("Compare TAG Before test & TAG after test") {
       steps {
         script {
           TAG_NAME = sh returnStdout: true, script: """docker exec redis_server 'get' 'TAG_NAME' """
+          COMMIT_SHA = sh returnStdout: true, script: """docker exec redis_server 'get' 'COMMIT_HASH' """
+          REPO_LINK = sh returnStdout: true, script: """docker exec redis_server 'get' 'DEV_REPO' """
           echo TAG_NAME
+          echo COMMIT_SHA
+          echo REPO_LINK
          /* COMMIT_SHA_AFTER_TEST = sh """git ls-remote rev-list -n 1 ${RELEASE_TAG}"""
           if(COMMIT_SHA_AFTER_TEST != RELEASE_TAG) {
              error("Commit hash has been changed!")
