@@ -7,6 +7,7 @@ pipeline {
     stage("Compare TAG Before test & TAG after test") {
       steps {
         script {
+          sh "echo ${test}"
           sh "echo ${TAG_NAME}"
           sh "echo ${COMMIT_SHA}"
          /* COMMIT_SHA_AFTER_TEST = sh """git ls-remote rev-list -n 1 ${RELEASE_TAG}"""
