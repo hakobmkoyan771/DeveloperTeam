@@ -22,6 +22,8 @@ pipeline {
           dir('DevRepo') {
             git branch: 'main', url: "${REPO_LINK}" 
             COMMIT_SHA_AFTER_TEST = sh returnStdout: true, script: "git rev-list -n 1 ${TAG_NAME}"
+            echo COMMIT_SHA_AFTER_TEST
+            echo COMMIT_SHA
             if(COMMIT_SHA_AFTER_TEST != COMMIT_SHA) {
               error("Commit hashes are not equal each other") 
             }
