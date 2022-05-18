@@ -10,6 +10,7 @@ pipeline {
           sh "echo ${test}"
           sh "echo ${TAG_NAME}"
           sh "echo ${COMMIT_SHA}"
+          sh "echo ${RELEASE_TAG}"
          /* COMMIT_SHA_AFTER_TEST = sh """git ls-remote rev-list -n 1 ${RELEASE_TAG}"""
           if(COMMIT_SHA_AFTER_TEST != RELEASE_TAG) {
              error("Commit hash has been changed!")
