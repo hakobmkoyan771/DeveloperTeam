@@ -7,7 +7,7 @@ pipeline {
     stage("Compare TAG Before test & TAG after test") {
       steps {
         script {
-          COMMIT_SHA_AFTER_TEST = sh """git ls-remote ${REPO_LINK} rev-list -n 1 ${RELEASE_TAG} | awk {print "\$1"}"""
+          COMMIT_SHA_AFTER_TEST = sh """git ls-remote rev-list -n 1 ${RELEASE_TAG}"""
           if(COMMIT_SHA_AFTER_TEST != RELEASE_TAG) {
              error("Commit hash has been changed!")
           }
