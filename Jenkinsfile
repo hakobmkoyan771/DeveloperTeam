@@ -19,6 +19,7 @@ pipeline {
     stage("Compare TAG Before test & TAG after test") {
       steps {
         script {
+          echo "abc"
           dir('DevRepo') {
             git branch: 'main', url: "${REPO_LINK}" 
             COMMIT_SHA_AFTER_TEST = sh returnStdout: true, script: "git rev-list -n 1 ${TAG_NAME}"
