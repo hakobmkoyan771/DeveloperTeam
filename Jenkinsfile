@@ -10,6 +10,9 @@ pipeline {
     stage("Initialize Variables") {
       steps {
         script {
+          withFolderProperties{
+            echo("Foo: ${env.ENV_VAR}")
+          }
           TAG_NAME = sh returnStdout: true, script: """docker exec redis_server redis-cli 'get' 'TAG_NAME' """
           COMMIT_SHA = sh returnStdout: true, script: """docker exec redis_server redis-cli 'get' 'COMMIT_HASH' """
           REPO_LINK = sh returnStdout: true, script: """docker exec redis_server redis-cli 'get' 'DEV_REPO' """      
